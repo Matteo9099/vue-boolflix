@@ -5,7 +5,7 @@
         </div>
         <div class="p-3 mx-5 d-flex align-items-center">
 
-            <input type="text" placeholder="Cerca Film o Serie Tv..." class="px-5 me-3" v-model.trim="search" @keyup="searchEmit">
+            <input type="text" placeholder="Cerca Film o Serie Tv..." class="px-5 me-3" v-model.trim="searchFilm" @keyup="searchEmit">
 
             <button class="btn btn-danger" @click="searchEmit">Cerca</button>
 
@@ -18,12 +18,12 @@ export default {
     name: 'SearchComponents',
     data() {
         return {
-            search: '',
+            searchFilm: '',
         };
     },
     methods: {
         searchEmit() {
-            this.$emit("search", this.search);
+            this.$emit("search", this.searchFilm);
         },
      },
 };
