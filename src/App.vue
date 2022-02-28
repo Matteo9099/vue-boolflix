@@ -1,63 +1,75 @@
 <template>
   <div id="app">
-     
-    <MyHeader @search="search"/>
+
+    <MyHeader @search="search" />
+    <MyMain :movies="movies" :series="series" />
 
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+//chiamata axios
+import axios from "axios";
 
-import MyHeader from './components/MyHeader.vue'
+import MyHeader from "./components/MyHeader.vue";
+import MyMain from "./components/MyMain.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     MyHeader,
+    MyMain,
   },
   data() {
-    return{
+    return {
       movies: [],
+      series: [],
       api: {
+        language: "it-IT",
         key: "1612beaf7a667a97d7e0e92a84e64df7",
-        baseUri: "https://api.themoviedb.org/3/search/movie"
-      }
-    }
+        baseUri: "https://api.themoviedb.org/3",
+      },
+    };
   },
   methods: {
-    search(text) {
-        if(!text) {
-          this.movies = [];
-          return;
-        }
+    search(searchText) {
+      if (!searchText) {
+        this.movies = [];
+        this.series = [];
+        return;
+      }
 
-        const { key } = this.api;
+      const { key, language } = this.api;
 
-        const setting = {
-            values: {
-              api_key: key,
-              query: text,
-            },
-        };
-
-        this.takeApi('search', setting, 'movies')
-
+      const setting = {
+        params: {
+          language,
+          api_key: key,
+          query: searchText,
+        },
+      };
+      this.callApi("search/movie", setting, "movies");
+      this.callApi("search/tv", setting, "series");
     },
-    takeApi(endpoint, setting, pointer) {
-      axios.get(`${ this.api.baseUri }/${ endpoint }`, setting).then((res) => {
-        this[pointer] = res.data.results;
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    }
-  }
-}
+    callApi(endpoint, setting, pointer) {
+      axios
+        .get(`${this.api.baseUri}/${endpoint}`, setting)
+        .then((res) => {
+          this[pointer] = res.data.results;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+};
 </script>
 
 <style lang="scss">
+@import "./assets/style/general.scss";
 
-  @import './assets/style/general.scss';
+  body{
+    background-color: #000;
+  }
 
 </style>
