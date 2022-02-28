@@ -80,6 +80,12 @@ export default {
             border-radius: 15px;
         }
 
+        &:hover {
+            opacity: 1;
+            transition: 0.5s;
+            transform: rotateY(180deg);
+        }
+
         .hover-description {
                 display: flex;
                 justify-content: space-between;
@@ -95,9 +101,9 @@ export default {
                 width: 7px;
               }
 
-            &:hover {
-                opacity: 1;
-                transition: 0.3s;
+            &:hover{
+              opacity: 1;
+              transform: rotateY(180deg);
             }
 
             .title {
