@@ -126,10 +126,7 @@ export default {
 
             .star-rating {
                 display: block;
-
-                i{
-                  color: rgb(245, 245, 49);
-                }
+                color: yellow;
             }
 
             span{

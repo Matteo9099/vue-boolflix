@@ -68,6 +68,9 @@ export default {
 <style lang="scss">
 @import "./assets/style/general.scss";
 
+// importo font awesome metodo 2
+// @import '~@fortawesome/fontawesome-free/css/all.css'
+
   body{
     background-color: #000;
   }
